@@ -3,6 +3,9 @@ import axios from "axios";
 
 const weatherstack_api_key = process.env.REACT_APP_API_KEY;
 
+// I extracted the weather data into their own component
+// since React threw an error because weather is null,
+// even if I conditionnaly rendered these elements
 const WeatherData = ({ capital, weather }) => (
   <>
     <h3>Weather in {capital}</h3>
