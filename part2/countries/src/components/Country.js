@@ -3,6 +3,24 @@ import axios from "axios";
 
 const weatherstack_api_key = process.env.REACT_APP_API_KEY;
 
+const WeatherData = ({ capital, weather }) => (
+  <>
+    <h3>Weather in {capital}</h3>
+    <div>
+      <span style={{ fontWeight: "bold" }}>temperature:</span>{" "}
+      {weather.current.temperature} celsius
+    </div>
+    <img
+      src={weather.current.weather_icons[0]}
+      alt={weather.current.weather_descriptions[0]}
+    />
+    <div>
+      <span style={{ fontWeight: "bold" }}>wind:</span>{" "}
+      {weather.current.wind_speed} Km/H direction {weather.current.wind_dir}
+    </div>
+  </>
+);
+
 const Country = ({ country }) => {
   const [weather, setWeather] = useState(null);
 
@@ -33,22 +51,7 @@ const Country = ({ country }) => {
         style={{ height: "100px" }}
       />
       {weather ? (
-        <>
-          <h3>Weather in {country.capital}</h3>
-          <div>
-            <span style={{ fontWeight: "bold" }}>temperature:</span>{" "}
-            {weather.current.temperature} celsius
-          </div>
-          <img
-            src={weather.current.weather_icons[0]}
-            alt={weather.current.weather_descriptions[0]}
-          />
-          <div>
-            <span style={{ fontWeight: "bold" }}>wind:</span>{" "}
-            {weather.current.wind_speed} Km/H direction{" "}
-            {weather.current.wind_dir}
-          </div>
-        </>
+        <WeatherData capital={country.capital} weather={weather} />
       ) : null}
     </div>
   );
